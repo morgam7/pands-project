@@ -1,2 +1,37 @@
 # pands-project
-Repository for Pands Project
+# Repository for Pands Project
+
+# Project Plan
+
+Handup: Sunday 12th May
+
+
+Week 1:
+Created pands-project repository with jupyter notebook.
+Uploaded url to vle.
+
+Week 2:
+Licked to image of iris on wikicommons
+Researched iris dataset and wrote two paragraphs on background. (Used chat gpt to get a draft version of text here. I did edit it.)
+Downloaded iris dataset from link given in project description: https://archive.ics.uci.edu/dataset/53/iris
+Downloaded this to my pands-project folder so data displayed as csv file in vs studio.
+There were two different datasets - bezdekIris and the iris dataset - not sure what the differnce is here
+
+Used method Ian showed us of importing the dataset into my jupyter notebook using pandas.
+Tried this first with the dataset I had downloaded but it didn't work.
+So tried to use a link instead as he did in the tutorial but could not find a link to raw data online - didn't look that hard.
+Decided to use the code on the https://archive.ics.uci.edu/dataset/53/iris wevsite to get the dataset down.
+DOesn't loolk right. Need to go over this agian. Have to leave it for now.
+
+
+
+
+Week 3:
+Week 4:
+Week 5:
+Week 6:
+Week 7:
+Week 8:
+Week 9:
+Week 10:
+
