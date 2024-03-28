@@ -23,6 +23,17 @@ So tried to use a link instead as he did in the tutorial but could not find a li
 Decided to use the code on the https://archive.ics.uci.edu/dataset/53/iris wevsite to get the dataset down.
 DOesn't loolk right. Need to go over this agian. Have to leave it for now.
 
+Week 3:
+
+I caught up with Ian's lectures and he has a lecture in Week 8 which shows exactly how to load the iris dataset. And answers the questions I had from last week. 
+
+The reason there are two version of the data from UCI is that there were a couple of errors in the original dataset and 
+these are corrected. 
+
+But following Ian's instructions I instead fetched the raw dataset from Michael Waskon's github: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv. I used the method that I tried originally which uses pandas and it worked with the link to the raw data on github.
+
+I did a quick inspection of the data following Ian's tutorial. I inspected the data types.
+
 
 
 
