@@ -1,7 +1,25 @@
-# pands-project
-# Repository for Pands Project
+# Iris Dataset Project
 
-# Project Plan
+This is the repository for my project for the Programming and Scripting module of the Higher Diploma in Science in Data Analytics given by ATU Galway-Mayo.
+
+## About This Project
+
+## Why This Project is useful
+
+Why the project is useful
+
+## Getting Started
+
+How users can get started with the project
+
+## Getting Help
+Where users can get help with your project
+
+## Contributing
+Who maintains and contributes to the project
+
+
+## Project Plan
 
 Handup: Sunday 12th May
 
