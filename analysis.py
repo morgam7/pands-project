@@ -1,27 +1,36 @@
 # Code for pands_project
 # Author: Marcella Morgan
 
-# Data frames
 
+# Importing libaries
 import pandas as pd
-# Plotting
-
 import matplotlib.pyplot as plt
-# Fetching iris dataset from a url
+import seaborn as sns
+import numpy as np 
+import sys
 
+# Reading in the iris dataset
 df = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')
 
+#  Outputting a summary of each variable to a single text file:
 
-# Taking a quick look
+sys.stdout = open("summary.txt", 'w')
 
-df
+print ("Summary of Dataset:")
 
-# Inspect types
+print (df.head)
+print (df.tail)
 
-df.dtypes
-# Description of dataset
+print ("Summary of Values")
 
-df.describe()
+print(df.describe())
+
+print ("Inspecting types")
+
+
+print (df.dtypes)
+
+
 # Converting data to numpy arrays
 
 # sepal length
@@ -36,12 +45,52 @@ plen = df["petal_length"]. to_numpy()
 # petal width
 pwidth = df["petal_width"]. to_numpy()
 
+# Histograms
+
+plt.title('Histogram of Sepal Length')
+plt.hist(slen)
+plt.savefig("Sepal-lenght.png")
+plt.close()
+
+plt.title('Histogram of Sepal Width')
+plt.hist(swidth)
+plt.savefig("Sepal-width.png")
+plt.close()
+
+plt.title('Histogram of petal Length')
+plt.hist(plen)
+plt.savefig("Petal-lenght.png")
+plt.close()
+
+plt.title('Histogram of Petal Width')
+plt.hist(pwidth)
+plt.savefig("Petal-Width.png")
+plt.close()
 
 
-# Making a simple plot
 
-plt.plot(plen, pwidth, 'x') # 'x' variable here displays points as xs
+plt.title('Scatterplot of Petal Width and Petal length')
+plt.plot(plen, pwidth, 'x')
+plt.savefig("Petal_Width and Petal_length.png")
+plt.close()
 
+plt.title('Scatterplot of Sepal Width and Sepal length')
+plt.plot(slen, swidth, 'x')
+plt.savefig("Sepal_Width and Sepal_length.png")
+plt.close()
+
+plt.title('Scatterplot of Petal Width and Sepal length')
+plt.plot(slen, pwidth, 'x')
+plt.savefig("Petal_Width and Sepal_length.png")
+plt.close()
+
+plt.title('Scatterplot of Sepal Width and Petal length')
+plt.plot(plen, swidth, 'x')
+plt.savefig("Sepal_Width and Petal_length.png")
+plt.close()
+
+
+'''
 # Axis labels
 
 plt.xlabel('Petal Length (cm)')
@@ -51,3 +100,5 @@ plt.ylabel('Petal Width (cm)')
 
 plt.title ('Iris Data Set')
 plt.show()
+
+'''
