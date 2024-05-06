@@ -1,7 +1,6 @@
 # Code for pands_project
 # Author: Marcella Morgan
 
-
 # Importing libaries
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,95 +9,80 @@ import numpy as np
 import sys
 
 # Reading in the iris dataset
-df = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')
+df = pd.read_csv('iris.csv')
 
-#  Outputting a summary of each variable to a single text file:
+# Pandas:
 
+# Filtering dataset by variable and converting to numpy arrays.
+slen = df["sepal_length"]. to_numpy()
+swidth = df["sepal_width"]. to_numpy()
+plen = df["petal_length"]. to_numpy()
+pwidth = df["petal_width"]. to_numpy()
+
+# Summary:
+
+# Writing a summary of each variable to a single text file:
 sys.stdout = open("summary.txt", 'w')
 
 print ("Summary of Dataset:")
-
 print (df.head)
 print (df.tail)
-
 print ("Summary of Values")
-
 print(df.describe())
-
 print ("Inspecting types")
-
-
 print (df.dtypes)
 
 
-# Converting data to numpy arrays
+# Histograms:
 
-# sepal length
-slen = df["sepal_length"]. to_numpy()
+# Pyplot:
+# I will use pyplot to make the histograms
+# Writing a function to make a histogram and name elements
+def histogram(var, name, colour): 
+        plt.hist(var, alpha = 0.45, color = colour) # alpha parameter defines transparancy of histogram 
+        plt.title(f"Histogram of {name}") # Using function to insert name
+        plt.xlabel(f"{name} (cm)")
+        plt.ylabel("Count")
+        plt.savefig(f"{name} Histogram")
+        plt.close() # Closing here or else the function will place each new histogram over the previous on the same axis.
+                    # And I don't want to do this here but the transparency parameter would come in handy if I did.
 
-# sepal width
-swidth = df["sepal_width"]. to_numpy()
-
-# petal length
-plen = df["petal_length"]. to_numpy()
-
-# petal width
-pwidth = df["petal_width"]. to_numpy()
-
-# Histograms
-
-plt.title('Histogram of Sepal Length')
-plt.hist(slen)
-plt.savefig("Sepal-lenght.png")
-plt.close()
-
-plt.title('Histogram of Sepal Width')
-plt.hist(swidth)
-plt.savefig("Sepal-width.png")
-plt.close()
-
-plt.title('Histogram of petal Length')
-plt.hist(plen)
-plt.savefig("Petal-lenght.png")
-plt.close()
-
-plt.title('Histogram of Petal Width')
-plt.hist(pwidth)
-plt.savefig("Petal-Width.png")
-plt.close()
+# Inputitng arguments using subsets I made earlier with pandas
+histogram(swidth, "Sepal Width", 'blue')
+histogram(plen, "Petal Length", 'green')
+histogram(pwidth, "Petal Width", 'orange')
+histogram(slen, "Sepal Length", 'red')
 
 
+# Seaborn:
+# I want to see how the species differ in size so I will use Seaborn's histplot function. This will allow me to represent 
+# the categroical variable 'species' with the 'hue' parameter.
+# I will also display all four histograms on the same figure.
 
-plt.title('Scatterplot of Petal Width and Petal length')
-plt.plot(plen, pwidth, 'x')
-plt.savefig("Petal_Width and Petal_length.png")
-plt.close()
+# Creating a stateless plot here that will allow me to choose number of axes 
+fig, axes = plt.subplots(2, 2)  
+# Making figure bigger to see all four plots clearly
+fig.set_figwidth(12)
+fig.set_figheight(8) 
 
-plt.title('Scatterplot of Sepal Width and Sepal length')
-plt.plot(slen, swidth, 'x')
-plt.savefig("Sepal_Width and Sepal_length.png")
-plt.close()
-
-plt.title('Scatterplot of Petal Width and Sepal length')
-plt.plot(slen, pwidth, 'x')
-plt.savefig("Petal_Width and Sepal_length.png")
-plt.close()
-
-plt.title('Scatterplot of Sepal Width and Petal length')
-plt.plot(plen, swidth, 'x')
-plt.savefig("Sepal_Width and Petal_length.png")
+# Using histplot function with ax parameter to put all four histograms on same figure
+# .set_title lets me title each histogram 
+sns.histplot(data = df, x = swidth, hue = "species", ax=axes[0,0]).set_title("Sepal Width (cm)")
+sns.histplot(data = df, x = slen, hue = "species", ax=axes[0,1]).set_title("Sepal Length (cm)")   
+sns.histplot(data = df, x = pwidth, hue = "species", ax=axes[1,0]).set_title("Petal Width (cm)")
+sns.histplot(data = df, x = plen, hue = "species", ax=axes[1,1]).set_title("Petal Length (cm)")
+plt.savefig("Histograms with Species")
 plt.close()
 
 
-'''
-# Axis labels
+# Scatterplots:
 
-plt.xlabel('Petal Length (cm)')
-plt.ylabel('Petal Width (cm)')
+# Using Seaborn library to make the scatterplots with very handy pairplot function. This also 
+# makes a historgram of each variable.
+# The 'corner' parameter cuts of the repeated scatterplots. Using 'hue' again to display species.
+# Anchoring the legend in a nicer position than the default
+sns.pairplot(data=df, hue="species", corner=True).legend.set_bbox_to_anchor((.61, .6))
+plt.savefig("Scatterplots with Species")
+plt.close()
 
-# Title
 
-plt.title ('Iris Data Set')
-plt.show()
-
-'''

@@ -8,9 +8,7 @@ To create this repository, I installed Python using [Anaconda](https://www.anaco
 
 ## Background on the Iris Dataset
 
-The Iris Dataset was created by the British statistician and biologist Ronald Fisher in 1936. It contains measurements of various features of iris flowers, including sepal length, sepal width, petal length, and petal width and contains 150 samples of iris, with 50 samples from each of three species: setosa, versicolor, and virginica.
-
-Fisher's work highlights how the dataset can be used to demonstrate various statistical techniques and so the Iris Dataset has become a classic in the field of statistical analysis, serving as a benchmark for testing classification algorithms.
+The Iris Dataset was created by the British statistician and biologist Ronald Fisher in 1936. It contains measurements of various features of iris flowers, including sepal length, sepal width, petal length, and petal width and contains 150 samples of iris, with 50 samples from each of three species: setosa, versicolor, and virginica. Fisher's work highlights how the dataset can be used to demonstrate various statistical techniques and so the Iris Dataset has become a classic in the field of statistical analysis, serving as a benchmark for testing classification algorithms.
 
 The Iris dataset is perfect for beginners in data analytics because it's simple and has a clear real-world application. We can visualise the flowers and understand why it's useful to study them. With features like the sepal and petal measurements, it's great for practicing classification and clustering techniques. And along with these qualitative variables we get a quantitive one also - species.
 
@@ -18,23 +16,23 @@ The Iris dataset is perfect for beginners in data analytics because it's simple 
 
 <details><summary>Pandas</summary><br>
 Pandas is a powerful data manipulation and analysis library, offering data structures like DataFrame for handling structured data effectively.</details><br>
-
 <details><summary>Matplotlib</summary><br>
 Matplotlib is a versatile plotting library that provides a MATLAB-like interface for creating a wide range of static, interactive, and animated visualizations.</details><br>
-
 <details><summary>Seaborn</summary><br>
 Seaborn is built on top of Matplotlib and provides a high-level interface for drawing attractive and informative statistical graphics.</details><br>
-
 <details><summary>NumPy</summary><br>
 NumPy is the fundamental package for scientific computing in Python, providing support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions.</details><br>
-
 <details><summary>Warnings</summary><br>
 The warnings module is used to handle warning messages, and warnings.filterwarnings('ignore') suppresses these warnings to improve the clarity of the output.</details><br>
 
 
+## Summary
 
+## Pandas
 
+## Histograms
 
+## Scatterplots
 
 
 
@@ -45,6 +43,12 @@ The warnings module is used to handle warning messages, and warnings.filterwarni
 
 https://archive.ics.uci.edu/dataset/53/iris - dataset
 https://gist.github.com/citrusui/07978f14b11adada364ff901e27c7f61 - markdown
+
+https://www.geeksforgeeks.org/pandas-groupby/
+
+https://www.geeksforgeeks.org/how-to-plot-a-histogram-with-various-variables-in-matplotlib-in-python/
+https://www.geeksforgeeks.org/matplotlib-pyplot-subplots-in-python/
+
 
 ## Project Plan
 
