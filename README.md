@@ -1,6 +1,9 @@
 # Iris Dataset
 
+<div style="text-align: center;">
+
 ![Image of Iris](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Iris_%28plant%29.jpg/463px-Iris_%28plant%29.jpg)
+</div>
 
 This is the repository containing my project for the Programming and Scripting module of the [Higher Diploma in Science in Data Analytics given by ATU Galway-Mayo](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics). My lecturer was [Andrew Beatty](https://github.com/andrewbeattycourseware?tab=overview&from=2022-12-01&to=2022-12-31). The project is an anlysis of the famous [Iris dataset](https://archive.ics.uci.edu/dataset/53/iris).
 
@@ -26,62 +29,59 @@ NumPy is the fundamental package for scientific computing in Python, providing s
 The warnings module is used to handle warning messages, and warnings.filterwarnings('ignore') suppresses these warnings to improve the clarity of the output.</details><br>
 
 
-## Summary
+## Summary and Pandas
 
-## Pandas
+I downloaded the dataset from [here](https://archive.ics.uci.edu/dataset/53/iris) as Andrew suggested, but this dataset did not come with headers. So I instead used the dataset from [Michael Waskon's github](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv). Initially I used the method where I read the data by linking to the url - Ian showed us how to do this, but I decided to download the dataset as if there were any issues with accessing github my code would not work.
+
+For the summary.txt file I used the sys.stdout function to write the file. I then used pandas functions to summarise the data. The tricky part of this was the layout of the text file. Becasue the layout would be created by the python program I had less control over where text was placed. I used print() to print empty lines between each element.
+
+The pandas functions were useful for filtering the data. I filtered the data by species and created numpy arrays for each variable. I also used the groupby function to get the mean of each variable for each species.
 
 ## Histograms
 
+First I made a histogram for each variable using pyplot. Then, becasue I was interested in looking at the distribution of each species I used Seaborn's histplot function.
+
+The tricky part here was understanding the difference between stateless and stateful plots. When I wanted to plot the four seaborn histograms on the same figure I needed to create a stateless plot so that I could control how many axes there were. But then I wasn't able to use the displot function that I had used for the Penguin project. Because displot works with stateful plots. I had to use the histplot function instead. This also made it a bit more clear the difference between plt and ax when using pyplot. When you use plt it creates the figure for you. But ax creates the axes only. So you have to create the figure first.
+
+
 ## Scatterplots
 
+I used Seaborn's pairplot function here that is very straigtforward to use and doesn't require any filtering of data.
 
-
-
+I then wanted to look at a best fit line to see how correlation petal and sepal width and lenght were. And I wanted these to be on the same figure. I used Seaborn's lmplot function for this. However I ran into the same issue as I did earlier. lmplot would not accept the ax parameter becasue it creates a stateful plot. 
 
 
 ## Links
 
-https://archive.ics.uci.edu/dataset/53/iris - dataset
+Dataset:
+https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv
+https://archive.ics.uci.edu/dataset/53/iris 
+https://stackoverflow.com/questions/23464138/downloading-and-accessing-data-from-github-python
+
+
+
+Markdown:
 https://gist.github.com/citrusui/07978f14b11adada364ff901e27c7f61 - markdown
+https://markdown.land/markdown-center
 
+
+Pandas:
 https://www.geeksforgeeks.org/pandas-groupby/
+https://pandas.pydata.org/docs/user_guide/10min.html#min
+https://stackoverflow.com/questions/44881307/pandas-how-to-hide-the-header-when-the-output-need-header-as-a-condition-to-filt
 
+Histogram:
 https://www.geeksforgeeks.org/how-to-plot-a-histogram-with-various-variables-in-matplotlib-in-python/
 https://www.geeksforgeeks.org/matplotlib-pyplot-subplots-in-python/
 
 
 ## Project Plan
 
-Handup: Sunday 12th May
 
 
-Week 1:
-Created pands-project repository with jupyter notebook.
-Uploaded url to vle.
 
-Week 2:
-Licked to image of iris on wikicommons
-Researched iris dataset and wrote two paragraphs on background. (Used chat gpt to get a draft version of text here. I did edit it.)
-Downloaded iris dataset from link given in project description: https://archive.ics.uci.edu/dataset/53/iris
-Downloaded this to my pands-project folder so data displayed as csv file in vs studio.
-There were two different datasets - bezdekIris and the iris dataset - not sure what the differnce is here
 
-Used method Ian showed us of importing the dataset into my jupyter notebook using pandas.
-Tried this first with the dataset I had downloaded but it didn't work.
-So tried to use a link instead as he did in the tutorial but could not find a link to raw data online - didn't look that hard.
-Decided to use the code on the https://archive.ics.uci.edu/dataset/53/iris wevsite to get the dataset down.
-DOesn't loolk right. Need to go over this agian. Have to leave it for now.
 
-Week 3:
-
-I caught up with Ian's lectures and he has a lecture in Week 8 which shows exactly how to load the iris dataset. And answers the questions I had from last week. 
-
-The reason there are two version of the data from UCI is that there were a couple of errors in the original dataset and 
-these are corrected. 
-
-But following Ian's instructions I instead fetched the raw dataset from Michael Waskon's github: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv. I used the method that I tried originally which uses pandas and it worked with the link to the raw data on github.
-
-I did a quick inspection of the data following Ian's tutorial. I inspected the data types.
 
 
 
