@@ -38,19 +38,40 @@ print ()
 print (df["species"].value_counts())
 print ()
 
-# Filtering dataset by variable and converting to numpy arrays to be used later.
-slen = df["sepal_length"]. to_numpy()
-swidth = df["sepal_width"]. to_numpy()
-plen = df["petal_length"]. to_numpy()
-pwidth = df["petal_width"]. to_numpy()
+# Filtering dataset by variable to be used later.
+slen = df["sepal_length"]
+swidth = df["sepal_width"]
+plen = df["petal_length"]
+pwidth = df["petal_width"]
+
+# Filtering dataset by species to be used later.
+# I can filter the species column using a string - the name of each species
+setosa = df[df['species'] =="setosa"]
+versicolor = df[df['species'] =="versicolor"]
+virginica = df[df['species'] =="virginica"]
+
+# Filtering out the categorical variable. I needed to do this to make the corr() function work. But I ended up using the 
+# numeric_only parameter instead which was neater.
+numeric_data=df[["sepal_length","sepal_width","petal_length","petal_width"]] 
+print("Quantitative Variables Only:")
+print()
+print(numeric_data)
+print()
 
 # Using groupby function to get the mean of the variables of each species.
 print("Mean of each variable by species:")
 print()
 print(df.groupby("species").mean())
+print()
 
+# Using corr() function to get pearson's correlation for the variables.
+# I need add the (numeric_only=True) parameter so it will disregard the speices column. This is a recent change in pandas.
+print("Pearson's Correlation for each variable:")
+print()
+print(df.corr(method='pearson', numeric_only=True))
+print()
+correlation=df.corr(method='pearson', numeric_only=True) #labeling this to make it easier later when I make heatmap
 
-'''
 # Histograms:
 
 # Pyplot:
@@ -61,7 +82,7 @@ def histogram(var, name, colour):
         plt.title(f"Histogram of {name}") # Using function to insert name
         plt.xlabel(f"{name} (cm)")
         plt.ylabel("Count")
-        plt.savefig(f"{name} Histogram")
+        plt.savefig(f"Histogram of {name}")
         plt.close() # Closing here or else the function will place each new histogram over the previous on the same axis.
                     # And I don't want to do this here but the transparency parameter would come in handy if I did.
 
@@ -70,7 +91,6 @@ histogram(swidth, "Sepal Width", 'blue')
 histogram(plen, "Petal Length", 'green')
 histogram(pwidth, "Petal Width", 'orange')
 histogram(slen, "Sepal Length", 'red')
-
 
 # Seaborn:
 # I want to see how the species differ across the variables so I will use Seaborn's histplot function. This will allow me to represent 
@@ -92,7 +112,6 @@ sns.histplot(data = df, x = plen, hue = "species", ax=axes[1,1]).set_title("Peta
 plt.savefig("Histograms with Species")
 plt.close()
 
-
 # Scatterplots:
 
 # Using Seaborn library to make the scatterplots with very handy pairplot function. This also 
@@ -103,22 +122,75 @@ sns.pairplot(data=df, hue="species", corner=True).legend.set_bbox_to_anchor((.61
 plt.savefig("Scatterplots with Species")
 plt.close()
 
-'''
 # Best Fit Line:
 
-# I was interested in looking at the correlation between sepal length and petal length and sepal width and petal width
-# in each of the species.
-# I made a scatter plot with a best fit line using the lmplot fucntion in Seaborn. 
-# I indicating species with 'hue'
+# I want to look at the correlation between the variables.
+# I made a scatter plot with a best fit line using the lmplot fucntion in Seaborn.
+# Indicating species with 'hue'
 
-fig, axes = plt.subplots()
-sns.lmplot(x="sepal_length", y="petal_length", data=df, hue="species").set_titles("Sepal Length and Petal Length")
-plt.savefig("Sepal Length and Petal Length")
+sns.lmplot(x="sepal_length", y="sepal_width", data=df, hue="species").set_titles("Sepal Length and Sepal Width")
+plt.savefig("Best fit Sepal Length and Width")
 plt.close()
 
-sns.lmplot(x='sepal_width', y="petal_width", data=df, hue="species").set_titles("Sepal Width and Petal Width")
-plt.savefig("Sepal Width and Petal Width")
+sns.lmplot(x='petal_length', y="petal_width", data=df, hue="species").set_titles("Petal Length and Petal Width")
+plt.savefig("Best fit Petal Length and Width")
+plt.close()
+
+# I wanted to put these best fit lines on the same figure but lmplot does not support the 'ax' parameter I used earlier
+# with the histograms 
+# So I used regplot which works with the 'ax' parameter. But not with 'hue'! 
+# So I used the species dataset I filtered ealier to make best fit lines for each species.
+# This was not as much work as it looks because I was able to copy and paste the code for each species and just change the 
+# dataset. And it even autofilled for me!
+
+
+fig, axes = plt.subplots(2, 2)  
+fig.set_figwidth(12)
+fig.set_figheight(12) 
+fig.suptitle("Best Fit Line Setosa",fontsize=20) # I'm able to change font size of title here
+sns.regplot(data = setosa, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
+sns.regplot(data = setosa, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
+sns.regplot(data = setosa, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
+sns.regplot(data = setosa, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
+plt.savefig("Best Fit Setosa")
+plt.close()
+
+fig, axes = plt.subplots(2, 2)  
+fig.set_figwidth(12)
+fig.set_figheight(12) 
+fig.suptitle("Best Fit Line Versicolor",fontsize=20)
+sns.regplot(data = versicolor, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
+sns.regplot(data = versicolor, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
+sns.regplot(data = versicolor, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
+sns.regplot(data = versicolor, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
+plt.savefig("Best Fit Versicolor")
+plt.close()
+
+fig, axes = plt.subplots(2, 2)  
+fig.set_figwidth(12)
+fig.set_figheight(12) 
+fig.suptitle("Best Fit Line Virginica",fontsize=20)
+sns.regplot(data = virginica, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
+sns.regplot(data = virginica, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
+sns.regplot(data = virginica, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
+sns.regplot(data = virginica, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
+plt.savefig("Best Fit Virginica")
 plt.close()
 
 
+# Heatmap:
 
+# Another way to visaulise correlation is to make a heatmap.
+# Seaborn again came in handy with its heatmap function. I used the pearson's correlation I did earlier.
+# The 'cmap' parameter changes the colours. 
+
+sns.heatmap(correlation,cmap = "YlGnBu", linecolor = 'white', linewidths = 1) 
+plt.savefig("Heatmap")
+plt.close()
+
+# This is a heatmap with the correlation values printed in the boxes using 'annot' parameter. 
+# Also one barbie would like.
+
+sns.heatmap(correlation,cmap = 'PuRd', linecolor = 'white', linewidths = 1, annot=True) 
+plt.savefig("Heatmap for Barbie")
+plt.close()
