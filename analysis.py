@@ -5,7 +5,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np 
 import sys
 import warnings
 warnings.filterwarnings('ignore')
@@ -101,7 +100,7 @@ histogram(slen, "Sepal Length", 'red')
 fig, axes = plt.subplots(2, 2)  
 # Making figure bigger to see all four plots clearly
 fig.set_figwidth(12)
-fig.set_figheight(8) 
+fig.set_figheight(12) 
 
 # Using histplot function with ax parameter to put all four histograms on same figure
 # .set_title lets me title each histogram 
@@ -128,11 +127,11 @@ plt.close()
 # I made a scatter plot with a best fit line using the lmplot fucntion in Seaborn.
 # Indicating species with 'hue'
 
-sns.lmplot(x="sepal_length", y="sepal_width", data=df, hue="species").set_titles("Sepal Length and Sepal Width")
+sns.lmplot(x="sepal_length", y="sepal_width", data=df, hue="species").figure.suptitle("Sepal Length and Sepal Width")
 plt.savefig("Best fit Sepal Length and Width")
 plt.close()
 
-sns.lmplot(x='petal_length', y="petal_width", data=df, hue="species").set_titles("Petal Length and Petal Width")
+sns.lmplot(x='petal_length', y="petal_width", data=df, hue="species").figure.suptitle("Petal Length and Petal Width")
 plt.savefig("Best fit Petal Length and Width")
 plt.close()
 
@@ -140,57 +139,35 @@ plt.close()
 # with the histograms 
 # So I used regplot which works with the 'ax' parameter. But not with 'hue'! 
 # So I used the species dataset I filtered ealier to make best fit lines for each species.
-# This was not as much work as it looks because I was able to copy and paste the code for each species and just change the 
-# dataset. And it even autofilled for me!
 
+def regplot(var, name): 
+    fig, axes = plt.subplots(2, 2)  
+    fig.set_figwidth(12)
+    fig.set_figheight(12) 
+    fig.suptitle(f"Best Fit Line {name}",fontsize=20) # I'm able to change font size of title here
+    sns.regplot(data = var, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
+    sns.regplot(data = var, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
+    sns.regplot(data = var, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
+    sns.regplot(data = var, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
+    plt.savefig(f"Best Fit {name}")
+    plt.close()
 
-fig, axes = plt.subplots(2, 2)  
-fig.set_figwidth(12)
-fig.set_figheight(12) 
-fig.suptitle("Best Fit Line Setosa",fontsize=20) # I'm able to change font size of title here
-sns.regplot(data = setosa, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
-sns.regplot(data = setosa, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
-sns.regplot(data = setosa, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
-sns.regplot(data = setosa, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
-plt.savefig("Best Fit Setosa")
-plt.close()
-
-fig, axes = plt.subplots(2, 2)  
-fig.set_figwidth(12)
-fig.set_figheight(12) 
-fig.suptitle("Best Fit Line Versicolor",fontsize=20)
-sns.regplot(data = versicolor, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
-sns.regplot(data = versicolor, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
-sns.regplot(data = versicolor, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
-sns.regplot(data = versicolor, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
-plt.savefig("Best Fit Versicolor")
-plt.close()
-
-fig, axes = plt.subplots(2, 2)  
-fig.set_figwidth(12)
-fig.set_figheight(12) 
-fig.suptitle("Best Fit Line Virginica",fontsize=20)
-sns.regplot(data = virginica, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
-sns.regplot(data = virginica, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
-sns.regplot(data = virginica, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
-sns.regplot(data = virginica, x='sepal_length', y="sepal_width", ax=axes[1,1]).set_title("Sepal Width/Height (cm)")
-plt.savefig("Best Fit Virginica")
-plt.close()
-
+regplot(setosa, "Setosa")
+regplot(versicolor, "Versicolor")
+regplot(virginica, "Virginica")
 
 # Heatmap:
 
 # Another way to visaulise correlation is to make a heatmap.
 # Seaborn again came in handy with its heatmap function. I used the pearson's correlation I did earlier.
 # The 'cmap' parameter changes the colours. 
-
 sns.heatmap(correlation,cmap = "YlGnBu", linecolor = 'white', linewidths = 1) 
 plt.savefig("Heatmap")
 plt.close()
 
 # This is a heatmap with the correlation values printed in the boxes using 'annot' parameter. 
 # Also one barbie would like.
-
 sns.heatmap(correlation,cmap = 'PuRd', linecolor = 'white', linewidths = 1, annot=True) 
 plt.savefig("Heatmap for Barbie")
 plt.close()
+
