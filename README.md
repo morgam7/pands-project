@@ -2,12 +2,16 @@
 
 <div style="text-align: center;">
 
-![Image of Iris](https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5)
+![Image of Iris](https://miro.medium.com/v2/resize:fit:1400/1*f6KbPXwksAliMIsibFyGJw.png)
 </div>
 
 This is the repository containing my project for the Programming and Scripting module of the [Higher Diploma in Science in Data Analytics given by ATU Galway-Mayo](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics). My lecturer was [Andrew Beatty](https://github.com/andrewbeattycourseware?tab=overview&from=2022-12-01&to=2022-12-31). The project is an analysis of the famous [Iris dataset](https://archive.ics.uci.edu/dataset/53/iris).
 
-To create this repository, I installed Python using [Anaconda](https://www.anaconda.com/download), and I used [Visual Studio Code](https://code.visualstudio.com/) as a text editor and terminal.
+## Getting Started
+
+To get started with using this repository you will first need to install Python installed and the best way to do that is to use [Anaconda](https://www.anaconda.com/download).
+
+You will also need some sort of notebook editor. I use [Visual Studio Code](https://code.visualstudio.com/). Once you have what you need installed on your computer, then you can clone the repository down to your own machine, open it in Visual Studio Code or just have Visual Studio Code clone it for you and then you can run the notebook.
 
 ## Why this Project is useful
 
@@ -22,13 +26,13 @@ The Iris dataset is perfect for beginners in data analytics because it's simple 
 ## Python Libraries
 
 <details><summary>Pandas</summary><br>
-Pandas is a powerful data manipulation and analysis library, offering data structures like DataFrame for handling structured data effectively.</details><br>
+Pandas is a powerful open-source data analysis and manipulation library for Python. It provides data structures like DataFrames, which allow for efficient handling, cleaning, and analysis of structured data. With intuitive commands for merging, reshaping, and aggregating data, Pandas is essential for data scientists and analysts working with large datasets.</details><br>
 <details><summary>Matplotlib</summary><br>
-Matplotlib is a versatile plotting library that provides a MATLAB-like interface for creating a wide range of static, interactive, and animated visualizations.</details><br>
+Matplotlib is a popular open-source plotting library for Python. It allows for the creation of static, interactive, and animated visualizations in various formats. With its versatile functionality, users can generate plots, histograms, bar charts, and more.</details><br>
 <details><summary>Seaborn</summary><br>
-Seaborn is built on top of Matplotlib and provides a high-level interface for drawing attractive and informative statistical graphics.</details><br>
+Seaborn is a Python data visualization library based on Matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics. With built-in themes and color palettes, Seaborn simplifies the creation of complex visualizations like heatmaps, violin plots, and categorical plots, enhancing the ease and aesthetics of data analysis.</details><br>
 <details><summary>sys</summary><br>
-The sys module in Python is a handy tool that provides access to system-specific parameters and functions. It helps you interact with the Python interpreter, access command line arguments, manage module search paths, and more.</details><br>
+The sys module in Python provides access to some variables used or maintained by the Python interpreter and to functions that interact strongly with the interpreter. It's a built-in module and doesn't require installation.</details><br>
 <details><summary>Warnings</summary><br>
 The warnings module is used to handle warning messages, and warnings.filterwarnings('ignore') suppresses these warnings to improve the clarity of the output.</details><br>
 
@@ -152,7 +156,7 @@ https://stackabuse.com/ultimate-guide-to-heatmaps-in-seaborn-with-python/
 
 ## Conclusion
 
-In summary, my analysis of the Iris dataset revealed clear differences between the three Iris species, with Setosas standing out due to their distinct sepal and petal measurements. Setosas were particularly easy to identify because of their smaller petal length and width. Using heatmaps and best fit lines, we visualized these differences effectively. This analysis highlights why the Iris dataset is a classic example for learning about data analysis.
+In summary, my analysis of the Iris dataset revealed clear differences between the three Iris species, with Setosas standing out due to their distinct sepal and petal measurements. Setosas were particularly easy to identify because of their smaller petal length and width. Using heatmaps and best fit lines, we visualized the correlation between the variables. This analysis highlights why the Iris dataset is a classic example for learning about data analysis.
 
 ### Other Links that Helped:
 

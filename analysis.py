@@ -167,7 +167,7 @@ regplot(virginica, "Virginica")
 fig, axes = plt.subplots(2, 2)  
 fig.set_figwidth(16)
 fig.set_figheight(16)
-fig.suptitle("Heatmaps", fontsize=20)
+fig.suptitle("Heatmaps", fontsize=30)
 # Seaborn again came in handy with its heatmap function. I used the pearson's correlation I did earlier.
 # The 'cmap' parameter changes the colours. 
 # The correlation values are printed in the boxes using 'annot' parameter.
