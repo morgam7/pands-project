@@ -2,7 +2,7 @@
 
 <div style="text-align: center;">
 
-![Image of Iris](https://th.bing.com/th/id/OIP.qFiUIEnqBvRYklwbSk5yaQHaDT?pid=ImgDet&w=168&h=69.01244813278008&c=7&dpr=1.3)
+![Image of Iris](https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5)
 </div>
 
 This is the repository containing my project for the Programming and Scripting module of the [Higher Diploma in Science in Data Analytics given by ATU Galway-Mayo](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics). My lecturer was [Andrew Beatty](https://github.com/andrewbeattycourseware?tab=overview&from=2022-12-01&to=2022-12-31). The project is an analysis of the famous [Iris dataset](https://archive.ics.uci.edu/dataset/53/iris).
