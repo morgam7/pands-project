@@ -1,5 +1,7 @@
 # Code for pands_project
 # Author: Marcella Morgan
+# Code to analyse the Iris dataset for my project for the Programming and Scripting module of the Higher Diploma 
+# in Science in Data Analytics given by ATU Galway-Mayo.
 
 # Importing libaries
 import pandas as pd
@@ -71,6 +73,11 @@ print(df.corr(method='pearson', numeric_only=True))
 print()
 correlation=df.corr(method='pearson', numeric_only=True) #labeling this to make it easier later when I make heatmap
 
+# Making a pearson's correlation for each of the species to use later:
+corr_setosa = setosa.corr(method='pearson', numeric_only=True)
+corr_versicolor = versicolor.corr(method='pearson', numeric_only=True)
+corr_virginica = virginica.corr(method='pearson', numeric_only=True)
+
 # Histograms:
 
 # Pyplot:
@@ -96,11 +103,12 @@ histogram(slen, "Sepal Length", 'red')
 # the categroical variable 'species' with the 'hue' parameter.
 # I will also display all four histograms on the same figure.
 
-# Creating a stateless plot here that will allow me to choose number of axes 
+# Creating the figure here will allow me to choose number of axes using plt.subplots()
 fig, axes = plt.subplots(2, 2)  
 # Making figure bigger to see all four plots clearly
 fig.set_figwidth(12)
 fig.set_figheight(12) 
+fig.suptitle("Histograms with Species", fontsize=20) # I'm able to change font size of title here
 
 # Using histplot function with ax parameter to put all four histograms on same figure
 # .set_title lets me title each histogram 
@@ -117,19 +125,15 @@ plt.close()
 # makes a KDE of each variable.
 # The 'corner' parameter cuts of the repeated scatterplots. Using 'hue' again to display species.
 # And anchoring the legend in a nicer position than the default
-sns.pairplot(data=df, hue="species", corner=True).legend.set_bbox_to_anchor((.61, .6))
+pairplot = sns.pairplot(data=df, hue="species", corner=True).legend.set_bbox_to_anchor((.61, .6))
 plt.savefig("Scatterplots with Species")
 plt.close()
 
 # Best Fit Line:
 
 # I want to look at the correlation between the variables.
-# I made a scatter plot with a best fit line using the lmplot fucntion in Seaborn.
+# I made a scatter plot with a best fit line using the lmplot function in Seaborn.
 # Indicating species with 'hue'
-
-sns.lmplot(x="sepal_length", y="sepal_width", data=df, hue="species").figure.suptitle("Sepal Length and Sepal Width")
-plt.savefig("Best fit Sepal Length and Width")
-plt.close()
 
 sns.lmplot(x='petal_length', y="petal_width", data=df, hue="species").figure.suptitle("Petal Length and Petal Width")
 plt.savefig("Best fit Petal Length and Width")
@@ -144,7 +148,7 @@ def regplot(var, name):
     fig, axes = plt.subplots(2, 2)  
     fig.set_figwidth(12)
     fig.set_figheight(12) 
-    fig.suptitle(f"Best Fit Line {name}",fontsize=20) # I'm able to change font size of title here
+    fig.suptitle(f"Best Fit Line {name}",fontsize=20) 
     sns.regplot(data = var, x='petal_length', y="petal_width", ax=axes[0,0]).set_title("Petal Width/Height (cm)")
     sns.regplot(data = var, x='petal_length', y="sepal_width", ax=axes[0,1]).set_title("Petal Width/Sepal Height (cm)")
     sns.regplot(data = var, x='sepal_length', y="petal_width", ax=axes[1,0]).set_title("Sepal Width/Petal Height (cm)")
@@ -158,16 +162,22 @@ regplot(virginica, "Virginica")
 
 # Heatmap:
 
-# Another way to visaulise correlation is to make a heatmap.
+# Another way to visaulise correlation is to make a heatmap. 
+ #I want to make four heatmaps and put them on the same figure:
+fig, axes = plt.subplots(2, 2)  
+fig.set_figwidth(16)
+fig.set_figheight(16)
+fig.suptitle("Heatmaps", fontsize=20)
 # Seaborn again came in handy with its heatmap function. I used the pearson's correlation I did earlier.
 # The 'cmap' parameter changes the colours. 
-sns.heatmap(correlation,cmap = "YlGnBu", linecolor = 'white', linewidths = 1) 
+# The correlation values are printed in the boxes using 'annot' parameter.
+sns.heatmap(correlation, cmap = "PuBu", ax=axes[0,0], linecolor = 'white', linewidths = 1, annot=True).set_title("All Species")
+ # This is one barbie would like.
+sns.heatmap(corr_setosa, cmap = "PuRd", ax=axes[0,1], linecolor = 'white', linewidths = 1, annot=True).set_title("Setosa")
+# Adding the other species
+sns.heatmap(corr_versicolor, cmap = "BuGn", ax=axes[1,0], linecolor = 'white', linewidths = 1, annot=True).set_title("Versicolor")
+sns.heatmap(corr_virginica, cmap = "YlOrBr", ax=axes[1,1], linecolor = 'white', linewidths = 1, annot=True).set_title("Virginica")
 plt.savefig("Heatmap")
 plt.close()
 
-# This is a heatmap with the correlation values printed in the boxes using 'annot' parameter. 
-# Also one barbie would like.
-sns.heatmap(correlation,cmap = 'PuRd', linecolor = 'white', linewidths = 1, annot=True) 
-plt.savefig("Heatmap for Barbie")
-plt.close()
 
